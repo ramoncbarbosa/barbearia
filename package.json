@@ -2,17 +2,16 @@
   "name": "trabalho_final_barbearia",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/servico.js"
+    "start": "nodemon ./src/servico.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.1.5",
+    "express": "^4.21.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5"
   }
