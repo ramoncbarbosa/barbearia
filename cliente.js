@@ -18,6 +18,11 @@ class Client {
             console.log(`${this.socket.id} conectado ao servidor do barbeiro!`)
         })
 
+        this.socket.on("dispensed",()=>{
+            console.log("o barbeiro fechou")
+            this.socket.disconnect()
+        })
+
         this.socket.on("ticket", (ticket)=>{
             if(this.servicesDone>=this.maxServices){
                 console.log(`${this.socket.id} fez o maximo de serviços`)

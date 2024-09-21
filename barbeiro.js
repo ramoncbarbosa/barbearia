@@ -7,17 +7,35 @@ const server = http.createServer(app)
 const ioServer = new io(server)
 
 let ticket = 0
+let cycles = 0
 let clients = []
 let currentClient = null
 
 const barber_services_dictionary = {
     cut_hair: 3000,
-    beard_shave: 2000,
-    mustache_cut: 1000
+    beard_shave: 4000,
+    mustache_cut: 5000
+}
+
+async function closeBarber(){
+    for(let client of clients){
+        console.log(client)
+        ioServer.to(client).emit("dispensed")
+    }
+    console.log("Barber is tired, closing shop")
+    clients = []
+    currentClient = null
 }
 
 function doWork(client, service, cb) {
     console.log(`${client} doing ${service}`)
+
+    if(cycles>=2){
+        closeBarber()
+        return process.exit(0)
+    }
+
+    cycles++
 
     setTimeout(() => {
         console.log(`${client} completed ${service}`)
